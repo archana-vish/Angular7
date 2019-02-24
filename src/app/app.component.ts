@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'todo';
+  title = 'My Todo\'s application';
+  message = 'Welcome to Angular 7';
 }
