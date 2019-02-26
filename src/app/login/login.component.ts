@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +13,10 @@ export class LoginComponent implements OnInit {
   password : string = '';
   errormessage: string = 'Invalid credentials';
   invalidLogin: boolean = false;
+  
 
-  constructor() { }
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -21,6 +25,8 @@ export class LoginComponent implements OnInit {
     console.log('Printing username :: ' + this.username);
     if (this.username === 'in28minutes' && this.password === 'dummy') {
       this.invalidLogin = false;
+      this.router.navigate(['welcome']);
+      // route it to welcome page
     } else {
       this.invalidLogin = true;
     }
