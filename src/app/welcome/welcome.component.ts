@@ -5,6 +5,7 @@
 // Now each module is a collection of classes and function definitions
 // You can import the needed modules as per the below syntax
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-welcome',
@@ -20,11 +21,14 @@ export class WelcomeComponent implements OnInit {
   message: string = 'hello world';
 
   // aha! a constructor duh!
-  constructor() { }
+  // Inject an ActivatedRoute
+  constructor(private route: ActivatedRoute) { }
 
   // method implemented from OnInit
   ngOnInit() {
-    this.message = ' how are you..';
+    //this.message = ' how are you..';
+    console.log(this.route.snapshot.params['name']);
+    this.message = this.route.snapshot.params['name'];
   }
 
 }
