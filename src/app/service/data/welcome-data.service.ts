@@ -20,4 +20,10 @@ export class WelcomeDataService {
     return this.http.get<HelloWorldBean>('http://localhost:8080/hello-bean/path-variable/Angular');
     //return ("Hello world bean service");
   }
+
+  executeHelloWoldBeanServiceWithPathVariable(name)  {
+    return this.http.get<HelloWorldBean>(`http://localhost:8080/hello-bean/path-variable/${name}`);
+    //return ("Hello world bean service");
+  }
+  
 }

@@ -4,7 +4,7 @@
 </div>
 <div class="container">
   Click here to have a customised message 
-  <button (click)="getWelcomeMessage()" class="btn btn-success">Get Welcome Message</button>
+  <button (click)="getWelcomeMessageWithParam()" class="btn btn-success">Get Welcome Message</button>
 </div>
 <div class="container" *ngIf="messageFromService">
   <h2>Your customised message  </h2> {{messageFromService}}

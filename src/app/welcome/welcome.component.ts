@@ -31,11 +31,18 @@ export class WelcomeComponent implements OnInit {
   ngOnInit() {
     //this.message = ' how are you..';
     // console.log(this.route.snapshot.params['name']);
-    // this.message = this.route.snapshot.params['name'];
+     this.message = this.route.snapshot.params['name'];
   }
 
   getWelcomeMessage() {
     this.welcomeDataService.executeHelloWoldBeanService().subscribe(
+      response => this.handleSuccessfulResponse(response),
+      error => this.handleErrorResponse(error)
+    );
+  }
+
+  getWelcomeMessageWithParam() {
+    this.welcomeDataService.executeHelloWoldBeanServiceWithPathVariable(this.message).subscribe(
       response => this.handleSuccessfulResponse(response),
       error => this.handleErrorResponse(error)
     );
