@@ -6,6 +6,7 @@
 // You can import the needed modules as per the below syntax
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { WelcomeDataService } from '../service/data/welcome-data.service';
 
 @Component({
   selector: 'app-welcome',
@@ -22,13 +23,18 @@ export class WelcomeComponent implements OnInit {
 
   // aha! a constructor duh!
   // Inject an ActivatedRoute
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+    private welcomeDataService: WelcomeDataService) { }
 
   // method implemented from OnInit
   ngOnInit() {
     //this.message = ' how are you..';
-    console.log(this.route.snapshot.params['name']);
-    this.message = this.route.snapshot.params['name'];
+    // console.log(this.route.snapshot.params['name']);
+    // this.message = this.route.snapshot.params['name'];
+  }
+
+  getWelcomeMessage() {
+    console.log(this.welcomeDataService.executeHelloWoldBeanService().subscribe());
   }
 
 }
