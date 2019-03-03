@@ -20,6 +20,7 @@ export class WelcomeComponent implements OnInit {
 
   // Member variables
   message: string = 'hello world';
+  messageFromService:string;
 
   // aha! a constructor duh!
   // Inject an ActivatedRoute
@@ -34,7 +35,14 @@ export class WelcomeComponent implements OnInit {
   }
 
   getWelcomeMessage() {
-    console.log(this.welcomeDataService.executeHelloWoldBeanService().subscribe());
+    this.welcomeDataService.executeHelloWoldBeanService().subscribe(
+      response => this.handleSuccessfulResponse(response)
+    );
+  }
+
+  handleSuccessfulResponse(response) {
+    console.log('successful response :: ' + response.message);
+    this.messageFromService = response.message;
   }
 
 }
