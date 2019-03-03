@@ -36,13 +36,19 @@ export class WelcomeComponent implements OnInit {
 
   getWelcomeMessage() {
     this.welcomeDataService.executeHelloWoldBeanService().subscribe(
-      response => this.handleSuccessfulResponse(response)
+      response => this.handleSuccessfulResponse(response),
+      error => this.handleErrorResponse(error)
     );
   }
 
   handleSuccessfulResponse(response) {
     console.log('successful response :: ' + response.message);
     this.messageFromService = response.message;
+  }
+
+  handleErrorResponse(error) {
+    console.log('error :: ' + error);
+    this.messageFromService =   error.error.message;
   }
 
 }
