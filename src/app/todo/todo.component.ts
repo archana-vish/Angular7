@@ -18,6 +18,7 @@ export class TodoComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
+    this.todo = new Todo(1, '', false, new Date()); // So that when the page loads Todo is not null
     this.todoService.retrieveTodoById('in28minutes', this.id).subscribe(
       response => {
         console.log(response);
