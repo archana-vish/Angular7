@@ -20,24 +20,37 @@ export class TodoComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
-    this.todo = new Todo(1, '', false, new Date()); // So that when the page loads Todo is not null
-    this.todoService.retrieveTodoById('in28minutes', this.id).subscribe(
-      response => {
-        console.log(response);
-        this.todo = response;
-      }
-    )
+    this.todo = new Todo(this.id, '', false, new Date()); // So that when the page loads Todo is not null
+    
+    if (this.id > 0) {
+      this.todoService.retrieveTodoById('in28minutes', this.id).subscribe(
+        response => {
+          console.log(response);
+          this.todo = response;
+        }
+      )
+    }
   }
 
   saveTodo() {
     this.id = this.route.snapshot.params['id'];
     //this.todo = new Todo(1, '', false, new Date()); // So that when the page loads Todo is not null
-    this.todoService.updateTodo('in28minutes', this.id, this.todo).subscribe(
-      response => {
-        console.log(response);
-        this.router.navigate(['todos']);
-      }
-    )
+    if (this.id > 0) {
+      this.todoService.updateTodo('in28minutes', this.id, this.todo).subscribe(
+        response => {
+          console.log(response);
+          this.router.navigate(['todos']);
+        }
+      )
+    } else {
+      // Create a todo
+      this.todoService.createTodo('in28minutes',  this.todo).subscribe(
+        response => {
+          console.log(response);
+          this.router.navigate(['todos']);
+        }
+      )
+    }
   }
 
 
