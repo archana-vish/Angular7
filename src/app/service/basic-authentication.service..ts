@@ -13,18 +13,36 @@ export class BasicAuthenticationService {
 
   constructor(private http : HttpClient) { }
 
-  executeAuthenticationService(username, password)  {
-    //let basicAuthHeaderString = this.createBasicAuthenticationHttpMethod(username, password);
-    let basicAuthenticationHeader = 'Basic ' +window.btoa(username + ':' + password);
-    let header = new HttpHeaders({
-      Authorization : basicAuthenticationHeader
-    })
-    return this.http.get<AuthenticationBean>(
-      `${API_URL}/basicauth`,{headers: header}).pipe(
+  // executeAuthenticationService(username, password)  {
+  //   //let basicAuthHeaderString = this.createBasicAuthenticationHttpMethod(username, password);
+  //   let basicAuthenticationHeader = 'Basic ' +window.btoa(username + ':' + password);
+  //   let header = new HttpHeaders({
+  //     Authorization : basicAuthenticationHeader
+  //   })
+  //   return this.http.get<AuthenticationBean>(
+  //     `${API_URL}/basicauth`,{headers: header}).pipe(
+  //       map (
+  //         data => {
+  //           sessionStorage.setItem(AUTHENTICATED_USER,username);
+  //           sessionStorage.setItem(TOKEN,basicAuthenticationHeader);
+  //           return data;
+  //         }
+  //       )
+  //     );
+  //   //return ("Hello world bean service");
+  // }
+
+  executeJwtAuthenticationService(username, password)  {
+    
+    return this.http.post<any>(
+      `${API_URL}/authenticate`,{
+        username,
+        password
+      }).pipe(
         map (
           data => {
             sessionStorage.setItem(AUTHENTICATED_USER,username);
-            sessionStorage.setItem(TOKEN,basicAuthenticationHeader);
+            sessionStorage.setItem(TOKEN,`Bearer ${data.token}`); // The ticks are the only ones that are going to parse the request.. so be careful!
             return data;
           }
         )

@@ -40,6 +40,23 @@ export class LoginComponent implements OnInit {
         .subscribe(
           data => {
               console.log(data);
+              this.router.navigate(['/welcome', this.username])
+              this.validLogin = true;
+          }, 
+          error => {
+            console.log(error);
+            this.validLogin = false;
+
+          }
+        )
+  }
+
+  handleAuthLogin() {
+    this.basicAuthenticationService
+      .executeJwtAuthenticationService(this.username, this.password)
+        .subscribe(
+          data => {
+              console.log(data);
               this.router.navigate(['welcome', this.username])
               this.validLogin = true;
           }, 
